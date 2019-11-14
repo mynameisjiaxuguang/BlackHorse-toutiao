@@ -30,6 +30,7 @@
 </template>
 
 <script>
+// import { log } from 'util'
 // import func from '../../../vue-temp/vue-editor-bridge'
 export default {
   data () {
@@ -84,6 +85,14 @@ export default {
     login () {
       this.$refs.formObj.validate(function (isOK) {
         if (isOK) {
+          this.$axios({
+            url: '/authorizations',
+            data: this.loginForm,
+            method: 'post'
+          }).then(result => {
+            // console.log(result.data.data.token)
+            window.localStorage.setItem('user-token', result.data.data.token)
+          })
         }
       })
     }

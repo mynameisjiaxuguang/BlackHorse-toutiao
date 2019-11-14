@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirec: '/home'
+    redirect: '/home'
   },
   // 主页 一级路由
   {

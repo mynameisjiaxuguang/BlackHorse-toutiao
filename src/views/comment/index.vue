@@ -1,10 +1,10 @@
 <template>
-  <div>首页</div>
+  <div class="comment">评论列表</div>
 </template>
 
 <script>
 export default {
-  data () {}
+
 }
 </script>
 

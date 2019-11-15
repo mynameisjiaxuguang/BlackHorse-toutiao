@@ -89,10 +89,18 @@ export default {
             url: '/authorizations',
             data: this.loginForm,
             method: 'post'
-          }).then(result => {
-            // console.log(result.data.data.token)
-            window.localStorage.setItem('user-token', result.data.data.token)
           })
+            .then(result => {
+              // console.log(result.data.data.token)
+              window.localStorage.setItem('user-token', result.data.data.token)
+              this.$router.push('/home')
+            })
+            .catch(() => {
+              this.$message({
+                type: 'warning',
+                message: '手机号或者验证码错误'
+              })
+            })
         }
       })
     }

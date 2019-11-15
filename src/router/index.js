@@ -1,21 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/home/index.vue'     完整路径，下面为简写方式
-import Home from '../views/home'
-import Login from '../views/login'
-
+import Layout from '@/views/layout'
+import Login from '@/views/login'
+import Home from '@/views/home'
+import Article from '@/views/article'
+import Publish from '@/views/publish'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/home'
-  },
+  // {
+  //   path: '/',
+  //   redirect: '/layout'
+  // },
   // 主页 一级路由
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: Home
+      },
+      {
+        path: '/article',
+        component: Article
+      },
+      {
+        path: '/publish',
+        component: Publish
+      }
+    ]
   },
   // 登录页 一级路由
   {

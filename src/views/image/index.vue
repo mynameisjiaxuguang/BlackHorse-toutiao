@@ -1,10 +1,10 @@
 <template>
-  <div>首页</div>
+  <div class="image">素材管理</div>
 </template>
 
 <script>
 export default {
-  data () {}
+
 }
 </script>
 

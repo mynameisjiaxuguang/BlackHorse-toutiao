@@ -1,10 +1,10 @@
 <template>
-  <div>首页</div>
+  <div class="account">账户设置</div>
 </template>
 
 <script>
 export default {
-  data () {}
+
 }
 </script>
 

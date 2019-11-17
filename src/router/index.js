@@ -6,6 +6,7 @@ import Login from '@/views/login'
 import Home from '@/views/home'
 import Article from '@/views/article'
 import Publish from '@/views/publish'
+import NProgress from 'nprogress'
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,7 +20,7 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '',
+        path: '/',
         component: Home
       },
       {
@@ -50,5 +51,25 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
+// to去哪里，from来自哪里，next方法用于路由放行
+// router.beforeEach((to,from,next) => {
+//   // 开启顶部导航进度条
+//   NProgress.start()
+//    console.log('所有页面的访问都要经过这里');
+//    next(false)
+//   if (to.path ===  '/login') {
+//     next()
+//     return
+//   }
+//   const token = window.localStorage.getItem('user-token')
+//   if(token){
+//     next()
+//   } else {
+//     next('/login')
+//   }
+// })
+// 结束顶部导航进度条
+router.afterEach((to,from) => {
+  NProgress.done()
+})
 export default router

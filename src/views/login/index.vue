@@ -12,15 +12,15 @@
           <el-input v-model="loginForm.code" placeholder="请输入验证码" style="width:240px"></el-input>
           <el-button style="float:right" plain>发送验证码</el-button>
         </el-form-item>
-        <!-- <el-form-item prop="checked"> -->
+        <el-form-item prop="checked">
         <!-- 复选框 -->
-        <!-- <el-checkbox>我已阅读并同意用户协议和隐私条款</el-checkbox> -->
-        <!-- </el-form-item> -->
-        <el-form-item prop="type">
+          <el-checkbox v-model="loginForm.checked">我已阅读并同意用户协议和隐私条款</el-checkbox>
+        </el-form-item>
+        <!-- <el-form-item prop="type">
           <el-checkbox-group v-model="loginForm.type">
             <el-checkbox label="请同意协议" name="type"></el-checkbox>
           </el-checkbox-group>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item style="text-align:center">
           <el-button type="primary" @click="login" style="width:100%">登录</el-button>
         </el-form-item>
@@ -38,8 +38,7 @@ export default {
       loginForm: {
         mobile: '',
         code: '',
-        checked: false,
-        type: []
+        checked: false
       },
       loginRules: {
         // key:value
@@ -83,20 +82,23 @@ export default {
   },
   methods: {
     login () {
+      const that = this
       this.$refs.formObj.validate(function (isOK) {
+        console.log(this)
         if (isOK) {
-          this.$axios({
+          that.$axios({
             url: '/authorizations',
-            data: this.loginForm,
+            data: that.loginForm,
             method: 'post'
           })
             .then(result => {
               // console.log(result.data.data.token)
-              window.localStorage.setItem('user-token', result.data.data.token)
-              this.$router.push('/home')
+              // 登录成功时，把后端返回的数据token返回至本地存储中
+              window.localStorage.setItem('my-token', result.data.data.token)
+              that.$router.push('/')
             })
             .catch(() => {
-              this.$message({
+              that.$message({
                 type: 'warning',
                 message: '手机号或者验证码错误'
               })
